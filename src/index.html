@@ -1,35 +1,97 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="./assets/img/4geeks.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello Rigo with Vanilla.js</title>
-
-    <!-- Fontawesome is our recomended library for icons -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <!-- Write your HTML code here, you can delete everything withing the body tags -->
-    <div class="container-fluid text-center">
-      <h1 class="mt-5">Hello Rigo!</h1>
-      <img src="./assets/img/rigo-baby.jpg" />
-      <p class="alert alert-warning mt-4">
-        If this text is <b>not</b> centered and <b>yellow</b>, you probably have
-        an error
-      </p>
-      <div class="fixed-bottom p-4">
-        Made with ❤️ by
-        <a href="https://www.4geeksacademy.com">4Geeks Academy</a>
-      </div>
-    </div>
-
-    <!-- Do not delete this script tag, this is what connects your HTML with the Javascript code -->
-    <script type="module" src="/app.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carta Aleatoria</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #3a7d44;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Georgia, serif;
+    }
+ 
+    .card {
+      width: 220px;
+      height: 320px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 4px 4px 15px rgba(0,0,0,0.4);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+ 
+    .center {
+      font-size: 120px;
+      font-weight: bold;
+      line-height: 1;
+    }
+ 
+    .corner-top {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.2;
+    }
+ 
+    .corner-bottom {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.2;
+      transform: rotate(180deg);
+    }
+ 
+    .red   { color: red; }
+    .black { color: black; }
+  </style>
+</head>
+<body>
+ 
+  <div class="card">
+    <div class="corner-top" id="corner-top"></div>
+    <div class="center"     id="center"></div>
+    <div class="corner-bottom" id="corner-bottom"></div>
+  </div>
+ 
+  <script>
+    const suits = [
+      { symbol: "♥", color: "red"   },
+      { symbol: "♦", color: "red"   },
+      { symbol: "♠", color: "black" },
+      { symbol: "♣", color: "black" }
+    ];
+ 
+    const values = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+ 
+    function generateCard() {
+      var suit  = suits [Math.floor(Math.random() * 4)];
+      var value = values[Math.floor(Math.random() * 13)];
+ 
+      document.getElementById("center").textContent      = value;
+      document.getElementById("center").className        = "center " + suit.color;
+ 
+      document.getElementById("corner-top").innerHTML    = value + "<br>" + suit.symbol;
+      document.getElementById("corner-top").className    = "corner-top " + suit.color;
+ 
+      document.getElementById("corner-bottom").innerHTML = value + "<br>" + suit.symbol;
+      document.getElementById("corner-bottom").className = "corner-bottom " + suit.color;
+    }
+ 
+    window.onload = generateCard;
+  </script>
+ 
+</body>
 </html>
+ 
